@@ -1,4 +1,4 @@
-from seaborn.parse_doc import *
+from seaborn.meta.parse_doc import *
 import unittest
 
 class test_parse_doc(unittest.TestCase):

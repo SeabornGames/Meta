@@ -1,13 +1,15 @@
-""" This module contains some functionality that would be helpful for meta programming
+""" This module contains some functionality that would be helpful for
+    meta programming
 """
 __author__ = 'Ben Christenson'
 __date__ = "10/8/15"
-import os
 import glob
+import os
 
 
 def class_name_to_instant_name(name):
-    """ This will convert from 'ParentName_ChildName' to 'parent_name.child_name' """
+    """ This will convert from 'ParentName_ChildName' to
+    'parent_name.child_name' """
     name = name.replace('/', '_')
     ret = name[0].lower()
     for i in range(1, len(name)):
@@ -22,7 +24,8 @@ def class_name_to_instant_name(name):
 
 def instant_name_to_class_name(name):
     """
-        This will convert from 'parent_name.child_name' to 'ParentName_ChildName'
+        This will convert from 'parent_name.child_name' to
+        'ParentName_ChildName'
     :param name: str of the name to convert
     :return: str of the converted name
     """
@@ -46,8 +49,10 @@ def create_init_files(path):
     :param path: str of the path to start adding __init__.py to
     :return: None
     """
-    python_files = [os.path.basename(file_) for file_ in glob.glob(os.path.join(path, '*.py'))]
-    folders = [os.path.basename(folder) for folder in os.listdir(path) if os.path.isdir(folder)]
+    python_files = [os.path.basename(file_) for file_ in
+                    glob.glob(os.path.join(path, '*.py'))]
+    folders = [os.path.basename(folder) for folder in os.listdir(path)
+               if os.path.isdir(folder)]
     with open(path + '/__init__.py', 'w') as fn:
         if python_files:
             [fn.write('from %s import *\n' % file_) for file_ in python_files]

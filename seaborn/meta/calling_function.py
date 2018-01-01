@@ -10,7 +10,6 @@ import inspect
 import os
 import sys
 import traceback
-#from seaborn.python_2_to_3 import *
 
 
 def function_arguments(func):
@@ -34,7 +33,7 @@ def function_defaults(func):
     if getattr(inspect, 'signature',None) is None:
         return inspect.getargspec(func)[-1] or []
     else:
-        return [v.default for k,v in inspect.signature(func).parameters.items() if v.default is not inspect._empty]
+        return [v.default for k,v in list(inspect.signature(func).parameters.items()) if v.default is not inspect._empty]
 
 
 def function_doc(function_index=1, function_name=None):
@@ -59,7 +58,7 @@ def function_path(func):
     :return:
     """
     if getattr(func, 'func_code', None):
-        return func.func_code.co_filename.replace('\\', '/')
+        return func.__code__.co_filename.replace('\\', '/')
     else:
         return func.__code__.co_filename.replace('\\', '/')
 
@@ -91,7 +90,7 @@ def relevant_kwargs(function, exclude_keys='self', exclude_values=None, extra_va
     locals_values = function_kwargs(function_index=2, exclude_keys=exclude_keys)
     if extra_values:
         locals_values.update(extra_values)
-    return {k: v for k, v in locals_values if k in args}
+    return {k: v for k, v in locals_values.items() if k in args}
 
 
 def function_args(function):
@@ -185,7 +184,7 @@ def function_history():
     """
     ret = []
     frm = inspect.currentframe()
-    for i in xrange(100):
+    for i in range(100):
         try:
             if frm.f_code.co_name != 'run_code':  # this is pycharm debugger inserting middleware
                 ret.append(frm.f_code.co_name)
@@ -206,7 +205,7 @@ def func_frame(function_index, function_name):
     frm = inspect.currentframe()
     if function_name is not None:
         function_name = function_name.split('*')[0]  # todo replace this with regex
-        for i in xrange(1000):
+        for i in range(1000):
             if frm.f_code.co_name.startswith(function_name):
                 break
             frm = frm.f_back
@@ -234,7 +233,6 @@ def function_linenumber(function_index=1, function_name=None, width=5):
         return frm._f_lineno
     return str(frm.f_lineno).ljust(width)
 
-
 def function_name(function_index=1):
     ret = function_info(function_index=function_index + 1)
     return ret['class_name'], ret['function_name']
@@ -252,7 +250,7 @@ def path(function_index=1, function_name=None, deliminator='__'):
 
 def current_folder(function_index=1, function_name=None, deliminator='__'):
     info = function_info(function_index + 1, function_name)
-    return os.path.split(info['file'])[0]
+    return os.path.split(info['file'])[0].replace('\\','/')
 
 
 def trace_error(function_index=2):

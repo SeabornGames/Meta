@@ -22,7 +22,7 @@ class test_calling_function(unittest.TestCase):
         self.assertEqual(function_arguments(function_arguments),['func'])
 
     def test_function_defaults(self):
-        self.assertTupleEqual(function_defaults(function_doc),(1, None))
+        self.assertListEqual(function_defaults(function_doc),[1, None])
 
     def test_function_doc(self):
         """
@@ -64,7 +64,7 @@ class test_calling_function(unittest.TestCase):
 
     def test_function_history(self):
         self.assertListEqual(['function_history', 'test_function_history',
-                              'run', '__call__', '_wrapped_run']
+                              'run', '__call__', 'run']
                              ,function_history()[:5])
 
     def test_func_frame(self):
@@ -77,12 +77,7 @@ class test_calling_function(unittest.TestCase):
         comp = {}
         for k in relevant:
             exec('comp.update({"'+k+'":str(actual.'+k+')})')
-        expected = {'f_exc_traceback': 'None',
-                    'f_exc_type': 'None',
-                    'f_lineno': '79',
-                    'f_lasti': '158',
-                    'f_restricted': 'False',
-                    'f_exc_value': 'None'}
+        expected = {'f_lasti': '124', 'f_lineno': '79'}
         self.assertDictEqual(comp,expected)
 
     def test_function_name(self):

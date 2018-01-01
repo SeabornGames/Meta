@@ -1,8 +1,8 @@
-from seaborn.meta.meta import *
+from seaborn.meta.class_name import *
 import unittest
 import os
 
-class test_meta(unittest.TestCase):
+class test_class_name(unittest.TestCase):
     def test_class_name_to_instant_name(self):
         self.assertEqual("parent_name.child_name",class_name_to_instant_name("ParentName_ChildName"))
 

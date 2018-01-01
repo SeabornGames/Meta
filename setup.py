@@ -1,11 +1,11 @@
 from setuptools import setup
 
 setup(
-    name='seaborn_meta',
+    name='seaborn-meta',
     version='0.0.1',
     description='SeabornMeta allows for simple changing'
-				'of names between conventions, as well'
-				'as auto-generating init files',
+                'of names between conventions, as well'
+                'as auto-generating init files',
     long_description='',
     author='Ben Christenson',
     author_email='Python@BenChristenson.com',
@@ -16,9 +16,8 @@ setup(
     install_requires=[],
     extras_require={
     },
-    py_modules=['seaborn.meta'],
+    packages=['seaborn.meta'],
     license='MIT License',
-    packages=['seaborn'],
     classifiers=[
         'Intended Audience :: Developers',
         'Natural Language :: English',

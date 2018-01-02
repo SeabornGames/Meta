@@ -13,7 +13,9 @@ setup(
     download_url='https://github.com/SeabornGames/meta'
                  '/tarball/download',
     keywords=['meta'],
-    install_requires=[],
+    install_requires=[
+
+    ],
     extras_require={
     },
     packages=['seaborn.meta'],

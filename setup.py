@@ -28,6 +28,8 @@ setup(
         'Programming Language :: Python :: 3.6'],
     entry_points='''
         [console_scripts]
-        meta=seaborn.meta
+        calling_function = seaborn.meta.calling_function
+        class_name = seaborn.meta.class_name
+        parse_doc = seaborn.meta.parse_doc
     ''',
 )

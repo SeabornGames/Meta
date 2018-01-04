@@ -5,8 +5,8 @@
 __author__ = 'Ben Christenson'
 __date__ = "11/02/15"
 
-from seaborn.python_2_to_3 import *
-from seaborn.calling_function import function_doc
+#from seaborn.python_2_to_3 import *
+from seaborn.meta.calling_function import function_doc
 from seaborn.timestamp import datetime
 
 
@@ -93,5 +93,3 @@ def parse_arg_types(text=None, is_return_included=False):
                 ret[name.strip()] = evl(desc.split(None, 1)[0].replace('str', 'basestring'))
     return ret
 
-if __name__ == '__main__':
-    smoke_test()

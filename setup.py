@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name='seaborn-meta',
@@ -14,11 +14,11 @@ setup(
                  '/tarball/download',
     keywords=['meta'],
     install_requires=[
-
     ],
     extras_require={
     },
-    packages=['seaborn.meta'],
+    packages=['seaborn'] + ['seaborn.' + i
+                            for i in find_packages(where='./seaborn')],
     license='MIT License',
     classifiers=[
         'Intended Audience :: Developers',
@@ -28,10 +28,4 @@ setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.6'],
-    entry_points='''
-        [console_scripts]
-        calling_function = seaborn.meta.calling_function
-        class_name = seaborn.meta.class_name
-        parse_doc = seaborn.meta.parse_doc
-    ''',
 )

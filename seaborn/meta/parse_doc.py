@@ -5,9 +5,8 @@
 __author__ = 'Ben Christenson'
 __date__ = "11/02/15"
 
-#from seaborn.python_2_to_3 import *
 from seaborn.meta.calling_function import function_doc
-from seaborn.timestamp import datetime
+from datetime import datetime
 
 
 def parse_doc_dict(text=None, split_character="::"):

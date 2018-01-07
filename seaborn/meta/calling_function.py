@@ -105,34 +105,46 @@ def function_args(function):
         return function.f_code.co_varnames
 
 
-def function_kwargs(function_index=1, function_name=None, exclude_keys='self', exclude_values=None):
+def function_kwargs(function_index=1, function_name=None,
+                    exclude_keys='self', exclude_values=None):
     """
-    This will return a dict of the keyword arguments of the function that calls it
-    :param function_index: int of how many frames back the program should look (2 will give the parent of the caller)
-    :param function_name:  str of the function name (should not be used with function_index)
-    :param exclude_keys:   str,list,func if not a function it will be turned into one, defaults to excluding None
-    :param exclude_values: obj,list,func if not a function it will be turned into one, defaults to excluding 'self'
-    :return:               dict of arguments passed into the function making this call
+    This will return a dict of the keyword 
+    arguments of the function that calls it
+    :param function_index: int of how many frames back the program 
+                           should look (2 will give the parent of the caller)
+    :param function_name:  str of the function name (should not 
+                           be used with function_index)
+    :param exclude_keys:   str,list,func if not a function it 
+                           will be turned into one, defaults to excluding None
+    :param exclude_values: obj,list,func if not a function it will be 
+                           turned into one, defaults to excluding 'self'
+    :return:               dict of arguments passed into the 
+                           function making this call
     """
     if not hasattr(exclude_values, '__call__'):
-        _exclude_values = isinstance(exclude_values, list) and exclude_values or [exclude_values]
+        _exclude_values = isinstance(exclude_values, list) and\
+                          exclude_values or [exclude_values]
         exclude_values = lambda x: x in _exclude_values
 
     if not hasattr(exclude_keys, '__call__'):
-        _exclude_keys = isinstance(exclude_keys, list) and exclude_keys or [exclude_keys]
+        _exclude_keys = isinstance(exclude_keys, list) and\
+                        exclude_keys or [exclude_keys]
         exclude_keys = lambda x: x in _exclude_keys
 
     frm = func_frame(function_index + 1, function_name)
     args = frm.f_code.co_varnames[:frm.f_code.co_argcount]
-    ret = dict([(k, frm.f_locals[k]) for k in args if not exclude_keys(k) and not exclude_values(frm.f_locals[k])])
+    ret = dict([(k, frm.f_locals[k]) for k in args if not exclude_keys(k) and\
+                not exclude_values(frm.f_locals[k])])
     return ret
 
 
 def function_code(function_index=1, function_name=None):
     """
     This will return the code of the calling function
-    :param function_index: int of how many frames back the program should look (2 will give the parent of the caller)
-    :param function_name: str of what function to look for (should not be used with function_index)
+    :param function_index: int of how many frames back the program 
+                           should look (2 will give the parent of the caller)
+    :param function_name: str of what function to look for 
+                          (should not be used with function_index)
     :return: str of the code from the target function
     """
     frm = function_info(function_index + 1, function_name)
@@ -144,9 +156,12 @@ def function_info(function_index=1, function_name=None, line_number=None):
     This will return the class_name and function_name of the
     function traced back two functions.
 
-    :param function_index: int of how many frames back the program should look (2 will give the parent of the caller)
-    :param function_name: str of what function to look for (should not be used with function_index)
-    :param line_number: int, some times the user may want to override this for testing purposes
+    :param function_index: int of how many frames back the program 
+                           should look (2 will give the parent of the caller)
+    :param function_name: str of what function to look for (should 
+                           not be used with function_index)
+    :param line_number: int, some times the user may want to override 
+                           this for testing purposes
     :return tuple: ('cls_name','func_name',line_number,globals())
     """
     frm = func_frame(function_index + 1, function_name)
@@ -156,7 +171,8 @@ def function_info(function_index=1, function_name=None, line_number=None):
     if class_name is not None: # and not skip_class:
         class_name = str(type(class_name)).split('.',1)[-1].split("'")[0]
         # try:
-        #     class_name = str(class_name).split(None, 1)[1].split('.')[-1].replace(')', '')
+        #     class_name = str(class_name).split(None, 1)[1]
+        #     class_name = class_name.split('.')[-1].replace(')', '')
         # except:
         #     class_name = repr(class_name).split()[0].split('.')[-1]
         # if 'object at' in str(class_name):
@@ -186,7 +202,8 @@ def function_history():
     frm = inspect.currentframe()
     for i in range(100):
         try:
-            if frm.f_code.co_name != 'run_code':  # this is pycharm debugger inserting middleware
+            if frm.f_code.co_name != 'run_code':  # this is pycharm debugger
+                                                  # inserting middleware
                 ret.append(frm.f_code.co_name)
             frm = frm.f_back
         except Exception as e:
@@ -199,12 +216,15 @@ def func_frame(function_index, function_name):
     This will return the class_name and function_name of the
     function traced back two functions.
 
-    :param function_index: int of how many frames back the program should look (2 will give the parent of the caller)
-    :param function_name: str of what function to look for (should not be used with function_index
+    :param function_index: int of how many frames back the program 
+                           should look (2 will give the parent of the caller)
+    :param function_name: str of what function to look for (should 
+                           not be used with function_index
     :return frame: this will return the frame of the calling function  """
     frm = inspect.currentframe()
     if function_name is not None:
-        function_name = function_name.split('*')[0]  # todo replace this with regex
+        function_name = function_name.split('*')[0]  # todo replace this
+                                                     # todo with regex
         for i in range(1000):
             if frm.f_code.co_name.startswith(function_name):
                 break
@@ -224,8 +244,10 @@ def function_linenumber(function_index=1, function_name=None, width=5):
     """
     This will return the line number of the indicated function in the stack
     :param width:
-    :param function_index: int of how many frames back the program should look (2 will give the parent of the caller)
-    :param function_name:  str of what function to look for (should not be used with function_index
+    :param function_index: int of how many frames back the program 
+                           should look (2 will give the parent of the caller)
+    :param function_name:  str of what function to look for (should 
+                           not be used with function_index
     :return                str of the current linenumber
     """
     frm = func_frame(function_index + 1, function_name)
@@ -239,11 +261,13 @@ def function_name(function_index=1):
 
 
 def path(function_index=1, function_name=None, deliminator='__'):
-    ret = function_info(function_index=function_index + 1, function_name=function_name)
+    ret = function_info(function_index=function_index + 1,
+                        function_name=function_name)
     file_ = os.path.basename(ret['file']).split('.')[0]
 
     if ret['class_name']:
-        return '%s%s%s%s%s' % (file_, deliminator, ret['class_name'], deliminator, ret['function_name'])
+        return '%s%s%s%s%s' % (file_, deliminator, ret['class_name'],
+                               deliminator, ret['function_name'])
     else:
         return '%s%s%s' % (file_, deliminator, ret['function_name'])
 
@@ -263,7 +287,8 @@ def trace_error(function_index=2):
     traces = traceback.format_stack(limit=10)
     for trace in traces:
         file_, line_number, line_text = trace.split(',', 2)
-        if file_ == '  File "%s"' % info['file'] and line_number != 'line %s' % info['line_number']:
+        if file_ == '  File "%s"' % info['file'] and\
+                        line_number != 'line %s' % info['line_number']:
             return line_number.split()[-1], line_text.strip()
     return None, None
 

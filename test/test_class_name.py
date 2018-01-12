@@ -4,7 +4,6 @@ import os
 
 class test_class_name(unittest.TestCase):
     def test_class_name_to_instant_name(self):
-        self.assertTrue(False, "Flawed test")
         self.assertEqual("parent_name.child_name",class_name_to_instant_name("ParentName_ChildName"))
 
     def test_instant_name_to_class_name(self):

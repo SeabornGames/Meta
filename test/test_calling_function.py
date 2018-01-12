@@ -69,19 +69,21 @@ class test_calling_function(unittest.TestCase):
 
     def test_func_frame(self):
         actual = func_frame(1,'test_func_frame')
-        relevant = ['f_lasti','f_lineno']
-        comp = {}
-        for k in relevant:
-            exec('comp.update({"'+k+'":str(actual.'+k+')})')
-        expected = {'f_lasti': '68', 'f_lineno': '75'}
-        self.assertDictEqual(expected, comp)
+        expected = ['f_back','f_builtins','f_code','f_globals',
+                    'f_lasti','f_lineno','f_locals']
+        found = []
+        for key in expected:
+            if hasattr(actual, key):
+                found+=[key]
+        self.assertListEqual(expected, found)
 
     def test_function_name(self):
         self.assertTupleEqual(function_name(),
                               ('test_calling_function','test_function_name'))
 
     def test_path(self):
-        self.assertEqual(path(),'test_calling_function__test_calling_function__test_path')
+        self.assertEqual(
+            path(),'test_calling_function__test_calling_function__test_path')
 
     def test_current_folder(self):
         self.assertIn('/test',current_folder())
@@ -89,9 +91,10 @@ class test_calling_function(unittest.TestCase):
     def test_trace_error(self):
         err = trace_error()
         try:
-            self.assertListEqual([None,None],err)
+            self.assertEqual(None,err[1])
         except:
-            self.assertEqual(err[1],'in test_trace_error\n    err = trace_error()')
+            self.assertEqual('in test_trace_error\n    err = trace_error()',
+                             err[1])
 
 if __name__ == '__main__':
     unittest.main()

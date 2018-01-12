@@ -10,6 +10,7 @@ class test_class_name(unittest.TestCase):
         self.assertEqual("ParentName_ChildName",instant_name_to_class_name("parent_name.child_name"))
 
     def test_create_init_files(self):
+        self.assertTrue(False)
         success=True
         create_init_files(os.getcwd())
         try:

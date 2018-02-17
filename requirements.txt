@@ -24,7 +24,7 @@ python-dateutil==2.6.1
 python-editor==1.0.3
 requests==2.18.4
 requests-toolbelt==0.8.0
-seaborn-flask-server==0.0.1
+seaborn-flask-server==0.0.2
 seaborn-games==0.0.1
 seaborn-meta==0.0.1
 seaborn-table==1.3.0

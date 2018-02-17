@@ -57,7 +57,7 @@ class test_parse_doc(unittest.TestCase):
 
         self.assertDictEqual(
             result,expected,
-            'parse_arg_types has failed with %s' % parse_arg_types())
+            'parse_arg_types has failed with %s' % result)
 
 if __name__ == "__main__":
     unittest.main()

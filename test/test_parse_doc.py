@@ -1,7 +1,6 @@
 from seaborn.meta.parse_doc import *
 import unittest, sys
-
-if sys.version_info[0] > 2:
+if sys.version_info[0]==3:
     basestring = str
 
 class test_parse_doc(unittest.TestCase):

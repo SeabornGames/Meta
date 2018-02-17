@@ -22,7 +22,7 @@ class test_calling_function(unittest.TestCase):
         self.assertEqual(function_arguments(function_arguments),['func'])
 
     def test_function_defaults(self):
-        self.assertListEqual([1, None],list(function_defaults(function_doc)))
+        self.assertListEqual(list(function_defaults(function_doc)),[1, None])
 
     def test_function_doc(self):
         """
@@ -58,9 +58,9 @@ class test_calling_function(unittest.TestCase):
             return function_kwargs()
         self.assertDictEqual(test(a=1),{'a':1})
 
+    @unittest.skip("NotImplemented")
     def test_function_code(self):
-        pass
-        #raise NotImplemented
+        raise NotImplemented
 
     def test_function_history(self):
         self.assertListEqual(['function_history', 'test_function_history',
@@ -69,13 +69,16 @@ class test_calling_function(unittest.TestCase):
 
     def test_func_frame(self):
         actual = func_frame(1,'test_func_frame')
-        expected = ['f_back','f_builtins','f_code','f_globals',
-                    'f_lasti','f_lineno','f_locals']
-        found = []
-        for key in expected:
-            if hasattr(actual, key):
-                found+=[key]
-        self.assertListEqual(expected, found)
+        relevant = []
+        reject = ['trace','code','globals','back','locals','builtins']
+        for attr in dir(actual):
+            if attr[:2] == 'f_' and not attr[2:] in reject:
+                relevant += [attr]
+        comp = {}
+        for k in relevant:
+            exec('comp.update({"'+k+'":str(actual.'+k+')})')
+        expected = {'f_lasti': '124', 'f_lineno': '79'}
+        self.assertSetEqual(set(expected.keys()).union(comp.keys()),
 
     def test_function_name(self):
         self.assertTupleEqual(function_name(),

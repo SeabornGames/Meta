@@ -1,4 +1,7 @@
 from setuptools import setup, find_packages
+import os
+with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as f:
+    long_description = f.read()
 
 setup(
     name='seaborn-meta',
@@ -6,7 +9,7 @@ setup(
     description='SeabornMeta allows for simple changing'
                 'of names between conventions, as well'
                 'as auto-generating init files',
-    long_description='',
+    long_description=long_description,
     author='Ben Christenson',
     author_email='Python@BenChristenson.com',
     url='https://github.com/SeabornGames/meta',

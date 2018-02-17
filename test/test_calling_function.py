@@ -90,7 +90,7 @@ class test_calling_function(unittest.TestCase):
             path(),'test_calling_function__test_calling_function__test_path')
 
     def test_current_folder(self):
-        self.assertIn('/meta/test',current_folder())
+        self.assertIn('/test',current_folder())
 
     def test_trace_error(self):
         err = trace_error()

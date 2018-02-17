@@ -7,6 +7,12 @@ __date__ = "11/02/15"
 
 from seaborn.meta.calling_function import function_doc
 from datetime import datetime
+import sys
+
+if sys.version_info[0] == 2:
+    STR = 'basestring'
+else:
+    STR = 'str'
 
 
 def parse_doc_dict(text=None, split_character="::"):
@@ -85,10 +91,10 @@ def parse_arg_types(text=None, is_return_included=False):
         for param in text.split(':param ')[1:]:
             name, desc = param.split(':', 1)
             if desc.strip().startswith('list of '):
-                ret[name.strip()] = (list, evl(desc.split()[2].replace('str', 'basestring')))
+                ret[name.strip()] = (list, evl(desc.split()[2].replace('str', STR)))
             elif desc.strip().startswith('str timestamp'):
                 ret[name.strip()] = datetime
             else:
-                ret[name.strip()] = evl(desc.split(None, 1)[0].replace('str', 'basestring'))
+                ret[name.strip()] = evl(desc.split(None, 1)[0].replace('str', STR))
     return ret
 

@@ -5,7 +5,7 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as f:
 
 setup(
     name='seaborn-meta',
-    version='0.0.1',
+    version='0.0.2',
     description='SeabornMeta allows for simple changing'
                 'of names between conventions, as well'
                 'as auto-generating init files',
@@ -17,6 +17,7 @@ setup(
                  '/tarball/download',
     keywords=['meta'],
     install_requires=[
+        'seaborn-hack',
     ],
     extras_require={
     },

@@ -1,5 +1,7 @@
 from seaborn.meta.parse_doc import *
-import unittest
+import unittest, sys
+if sys.version_info[0]==3:
+    basestring = str
 
 class test_parse_doc(unittest.TestCase):
 
@@ -48,8 +50,12 @@ class test_parse_doc(unittest.TestCase):
         :param c: list of str for placeholder
         :return: None
         """
-        self.assertEqual(parse_arg_types() == {'a': basestring, 'b': int, 'c': (list, basestring), 'return': None},
-                         'parse_arg_types has failed with %s' % parse_arg_types())
+        self.assertDictEqual({'a': basestring, 'b': int,
+                              'c': (list, basestring),
+                              'return': None},
+                             parse_arg_types(),
+                             'parse_arg_types has failed with %s'
+                             % parse_arg_types())
 
 if __name__ == "__main__":
     unittest.main()

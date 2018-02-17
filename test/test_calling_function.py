@@ -79,6 +79,7 @@ class test_calling_function(unittest.TestCase):
             exec('comp.update({"'+k+'":str(actual.'+k+')})')
         expected = {'f_lasti': '124', 'f_lineno': '79'}
         self.assertSetEqual(set(expected.keys()).union(comp.keys()),
+                            set(comp.keys()))
 
     def test_function_name(self):
         self.assertTupleEqual(function_name(),

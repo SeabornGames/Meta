@@ -52,8 +52,8 @@ class test_parse_doc(unittest.TestCase):
         :return: None
         """
         result = parse_arg_types()
-        expected = {'a': 'basestring', 'b': int,
-                   'c': (list, 'basestring')}
+        expected = {'a': basestring, 'b': int,
+                   'c': (list, basestring)}
 
         self.assertDictEqual(
             result,expected,

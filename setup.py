@@ -5,7 +5,7 @@ with open(os.path.join(os.path.dirname(__file__), 'README.md')) as f:
 
 setup(
     name='seaborn-meta',
-    version='0.0.2',
+    version='0.0.3',
     description='SeabornMeta allows for simple changing'
                 'of names between conventions, as well'
                 'as auto-generating init files',

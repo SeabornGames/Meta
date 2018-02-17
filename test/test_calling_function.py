@@ -86,8 +86,9 @@ class test_calling_function(unittest.TestCase):
                               ('test_calling_function','test_function_name'))
 
     def test_path(self):
-        self.assertEqual(
-            path(),'test_calling_function__test_calling_function__test_path')
+        self.assertEqual(path(),
+                         'test_calling_function__test'
+                         '_calling_function__test_path')
 
     def test_current_folder(self):
         self.assertIn('/test',current_folder())

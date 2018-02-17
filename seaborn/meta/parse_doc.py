@@ -17,7 +17,8 @@ else:
 
 def parse_doc_dict(text=None, split_character="::"):
     """
-    Returns a dictionary of the parsed doc for example the following would return {'a':'A','b':'B'} ::
+    Returns a dictionary of the parsed doc for 
+    example the following would return {'a':'A','b':'B'} ::
         a:A
         b:B
     :param split_character:
@@ -26,7 +27,9 @@ def parse_doc_dict(text=None, split_character="::"):
     :return: dict
     """
     text = text or function_doc(2)
-    text = text.split(split_character, 1)[-1].split(':param')[0].split(':return')[0].strip().split('\n')
+    text = text.split(split_character, 1)[-1]
+    text = text.split(':param')[0].split(':return')[0]
+    text = text.strip().split('\n')
 
     def clean(t): return t.split(':', 1)[0].strip(), t.split(':', 1)[1].strip()
 
@@ -35,7 +38,8 @@ def parse_doc_dict(text=None, split_character="::"):
 
 def parse_doc_list(text=None, is_stripped=True, split_character="::"):
     """
-    Returns a list of the parsed doc for example the following would return ['a:A','b:'B] ::
+    Returns a list of the parsed doc for 
+    example the following would return ['a:A','b:'B] ::
         a:A
         b:B
     :param text: str of the text to parse, by default uses calling function doc
@@ -44,35 +48,44 @@ def parse_doc_list(text=None, is_stripped=True, split_character="::"):
     :return: list
     """
     text = text or function_doc(2)
-    text = text.split(split_character, 1)[-1].split(':param')[0].split(':return')[0].strip().split('\n')
+    text = text.split(split_character, 1)[-1]
+    text = text.split(':param')[0].split(':return')[0]
+    text = text.strip().split('\n')
 
     def clean(t): return is_stripped and t.strip() or t
 
     return [clean(line) for line in text]
 
 
-def parse_doc_str(text=None, is_untabbed=True, is_stripped=True, tab=None, split_character="::"):
+def parse_doc_str(text=None, is_untabbed=True, is_stripped=True,
+                  tab=None, split_character="::"):
     """
-    Returns a str of the parsed doc for example the following would return 'a:A\nb:B' ::
+    Returns a str of the parsed doc for example 
+    the following would return 'a:A\nb:B' ::
         a:A
         b:B
-    :param text:            str of the text to parse, by default uses calling function doc
+    :param text:            str of the text to parse, by 
+                            default uses calling function doc
     :param is_untabbed:     bool if True will untab the text
     :param is_stripped:     bool if True will strip the text
-    :param tab:             str of the tab to use when untabbing, by default it will self determine tab size
+    :param tab:             str of the tab to use when untabbing, 
+                            by default it will self determine tab size
     :param split_character: str of the character to split the text on
     :return: dict
     """
     text = text or function_doc(2)
-    text = text.split(split_character, 1)[-1].split(':param')[0].split(':return')[0]
-    tab = is_untabbed and (tab or text[:-1 * len(text.lstrip())].split('\n')[-1]) or ''
+    text = text.split(split_character, 1)[-1]
+    text = text.split(':param')[0].split(':return')[0]
+    tab = is_untabbed and \
+          (tab or text[:-1 * len(text.lstrip())].split('\n')[-1]) or ''
     text = is_stripped and text.strip() or text
     return text.replace('\n%s' % tab, '\n')
 
 
 def parse_arg_types(text=None, is_return_included=False):
     """
-    :param text:               str of the text to parse, by default uses calling function doc
+    :param text:               str of the text to parse, by default 
+                               uses calling function doc
     :param is_return_included: bool if True return will be return as well
     :return:                   dict of args and variable types
     """

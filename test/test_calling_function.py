@@ -94,7 +94,13 @@ class test_calling_function(unittest.TestCase):
 
     def test_trace_error(self):
         err = trace_error()
-        self.assertEqual(err[1],'in test_trace_error\n    err = trace_error()')
+        try:
+            self.assertEqual(err[1],'in test_trace_error\n    err = trace_error()')
+        except Exception as e:
+            try:
+                self.assertEqual(err[1], None)
+            except:
+                raise e
 
 if __name__ == '__main__':
     unittest.main()

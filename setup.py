@@ -18,7 +18,6 @@ setup(
                  '/tarball/download',
     keywords=['meta'],
     install_requires=[
-        'seaborn-hack',
     ],
     extras_require={
     },

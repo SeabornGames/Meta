@@ -1,4 +1,4 @@
-from seaborn.meta.class_name import *
+from seaborn_meta.class_name import *
 import unittest
 import os
 

@@ -1,4 +1,4 @@
-from seaborn.meta.parse_doc import *
+from seaborn_meta.parse_doc import *
 import unittest, sys
 if sys.version_info[0]==3:
     basestring = str

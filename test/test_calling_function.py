@@ -1,5 +1,5 @@
 #Ensure test_file_code
-from seaborn.meta.calling_function import *
+from seaborn_meta.calling_function import *
 from collections import OrderedDict
 import unittest
 
@@ -38,7 +38,7 @@ class test_calling_function(unittest.TestCase):
 
     def test_file_code(self):
         self.assertIn('#Ensure test_file_code\n'
-                      'from seaborn.meta.calling_function import *\n'
+                      'from seaborn_meta.calling_function import *\n'
                       'from collections import OrderedDict\n',file_code())
 
     def test_relevant_kwargs(self):

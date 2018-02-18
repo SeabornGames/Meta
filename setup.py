@@ -1,11 +1,12 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 import os
+
 with open(os.path.join(os.path.dirname(__file__), 'README.md')) as f:
     long_description = f.read()
 
 setup(
     name='seaborn-meta',
-    version='0.0.3',
+    version='1.0.0',
     description='SeabornMeta allows for simple changing'
                 'of names between conventions, as well'
                 'as auto-generating init files',
@@ -21,8 +22,7 @@ setup(
     ],
     extras_require={
     },
-    packages=['seaborn'] + ['seaborn.' + i
-                            for i in find_packages(where='./seaborn')],
+    packages=['seaborn_meta'],
     license='MIT License',
     classifiers=[
         'Intended Audience :: Developers',

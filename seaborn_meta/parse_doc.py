@@ -5,7 +5,7 @@
 __author__ = 'Ben Christenson'
 __date__ = "11/02/15"
 
-from seaborn.meta.calling_function import function_doc
+from seaborn_meta.calling_function import function_doc
 from datetime import datetime
 import sys
 

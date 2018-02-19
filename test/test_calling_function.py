@@ -33,7 +33,7 @@ class test_calling_function(unittest.TestCase):
                                         "\n        :return:\n        ")
 
     def test_function_path(self):
-        self.assertIn('/meta/calling_function.py',
+        self.assertIn('/seaborn_meta/calling_function.py',
                       function_path(function_path))
 
     def test_file_code(self):

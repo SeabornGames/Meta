@@ -211,7 +211,7 @@ def function_history():
     return ret
 
 
-def func_frame(function_index, function_name):
+def func_frame(function_index, function_name=None):
     """
     This will return the class_name and function_name of the
     function traced back two functions.
@@ -254,6 +254,7 @@ def function_linenumber(function_index=1, function_name=None, width=5):
     if width is None:
         return frm._f_lineno
     return str(frm.f_lineno).ljust(width)
+
 
 def function_name(function_index=1):
     ret = function_info(function_index=function_index + 1)

@@ -19,7 +19,7 @@ setup(
     keywords=['meta'],
     install_requires=[
     ],
-    extras_require={
+    extras_require={'test':[],
     },
     packages=['seaborn_meta'],
     license='MIT License',

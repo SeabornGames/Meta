@@ -5,10 +5,8 @@
         builtin functions like eval, break this
         pycharm will also break this, although it sometimes can recover
 """
-
 import inspect
 import os
-import sys
 import traceback
 
 
@@ -33,14 +31,16 @@ def function_defaults(func):
     if getattr(inspect, 'signature',None) is None:
         return inspect.getargspec(func)[-1] or []
     else:
-        return [v.default for k,v in list(inspect.signature(func).parameters.items()) if v.default is not inspect._empty]
+        return [v.default for k,v in list(
+            inspect.signature(func).parameters.items())
+                if v.default is not inspect._empty]
 
 
 def function_doc(function_index=1, function_name=None):
     """
         This will return the doc of the calling function
-    :param function_index: int of how many frames back the program should look (2 will give the parent of the caller)
-    :param function_name: str of what function to look for (should not be used with function_index
+    :param function_index: int of how many frames back the program should look
+    :param function_name: str of what function to look for
     :return: str of the doc from the target function
     """
     frm = func_frame(function_index + 1, function_name)
@@ -66,8 +66,11 @@ def function_path(func):
 def file_code(function_index=1, function_name=None):
     """
     This will return the code of the calling function
-    :param function_index: int of how many frames back the program should look (2 will give the parent of the caller)
-    :param function_name: str of what function to look for (should not be used with function_index
+    function_index of 2 will give the parent of the caller
+    function_name should not be used with function_index
+
+    :param function_index: int of how many frames back the program should look
+    :param function_name: str of what function to look for
     :return: str of the code from the target function
     """
     info = function_info(function_index + 1, function_name)
@@ -75,14 +78,20 @@ def file_code(function_index=1, function_name=None):
         return fn.read()
 
 
-def relevant_kwargs(function, exclude_keys='self', exclude_values=None, extra_values=None):
+def relevant_kwargs(function, exclude_keys='self', exclude_values=None,
+                    extra_values=None):
     """
-    This will return a dictionary of local variables that are parameters to the function provided in the arg
-        this is to be used like
-        function(**relevant_kwargs(function))
+    This will return a dictionary of local variables that are parameters to the
+    function provided in the arg.
+
+    Example:
+     function(**relevant_kwargs(function))
+
     :param function:       function to select parameters for
-    :param exclude_keys:   str,list,func if not a function it will be turned into one, defaults to excluding None
-    :param exclude_values: obj,list,func if not a function it will be turned into one, defaults to excluding 'self'
+    :param exclude_keys:   str,list,func if not a function it will be converted
+                           into a funciton, defaults to excluding None
+    :param exclude_values: obj,list,func if not a function it will be convereted
+                           into one, defaults to excluding 'self'
     :param extra_values:   dict of other values to include with local
     :return:               dict of local variables for the function
     """

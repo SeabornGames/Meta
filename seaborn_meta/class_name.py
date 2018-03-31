@@ -1,8 +1,6 @@
 """ This module contains some functionality that would be helpful for
     meta programming
 """
-__author__ = 'Ben Christenson'
-__date__ = "10/8/15"
 import glob
 import os
 

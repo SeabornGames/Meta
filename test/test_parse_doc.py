@@ -6,7 +6,7 @@ if sys.version_info[0] == 3:
     basestring = str
 
 
-class test_parse_doc(unittest.TestCase):
+class TestParseDoc(unittest.TestCase):
     def test_dict(self, a='A', b=5, c=None):
         """ This will show the answer for each parse func::
             a:A

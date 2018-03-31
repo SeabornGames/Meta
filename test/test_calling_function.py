@@ -37,7 +37,7 @@ class test_calling_function(unittest.TestCase):
                       function_path(function_path))
 
     def test_file_code(self):
-        self.assertIn('#Ensure test_file_code\n', file_code()[:500])
+        self.assertIn('# Ensure test_file_code\n', file_code()[:500])
 
     def test_relevant_kwargs(self):
         def test(a=1, b=2, c=False, **kwargs):

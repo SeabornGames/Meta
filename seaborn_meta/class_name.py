@@ -47,10 +47,11 @@ def create_init_files(path):
     :param path: str of the path to start adding __init__.py to
     :return: None
     """
-    python_files = [os.path.basename(file_) for file_ in
-                    glob.glob(os.path.join(path, '*.py'))]
+    python_files = [os.path.basename(file_)[:-3] for file_ in
+                    glob.glob(os.path.join(path, '*.py'))
+                    if not file_.endswith('__init__.py')]
     folders = [os.path.basename(folder) for folder in os.listdir(path)
-               if os.path.isdir(folder)]
+               if os.path.isdir(os.path.join(path, folder))]
     with open(path + '/__init__.py', 'w') as fn:
         if python_files:
             [fn.write('from %s import *\n' % file_) for file_ in python_files]

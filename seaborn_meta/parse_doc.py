@@ -1,7 +1,7 @@
 """ This module is to provide support for auto parsing function doc.
     It looks for the text in the doc string after :: but before :param
     """
-from seaborn_meta.calling_function import function_doc
+from .calling_function import function_doc
 from datetime import datetime
 import sys
 

@@ -1,5 +1,4 @@
 import unittest
-
 from seaborn_meta.parse_doc import *
 
 if sys.version_info[0] == 3:

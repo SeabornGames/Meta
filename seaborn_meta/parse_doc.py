@@ -1,11 +1,7 @@
 """ This module is to provide support for auto parsing function doc.
     It looks for the text in the doc string after :: but before :param
-    It relies on the seaborn.callingfunction
     """
-__author__ = 'Ben Christenson'
-__date__ = "11/02/15"
-
-from seaborn.meta.calling_function import function_doc
+from .calling_function import function_doc
 from datetime import datetime
 import sys
 
@@ -103,11 +99,12 @@ def parse_arg_types(text=None, is_return_included=False):
     if ':param' in text:
         for param in text.split(':param ')[1:]:
             name, desc = param.split(':', 1)
+            name = name.strip()
             if desc.strip().startswith('list of '):
-                ret[name.strip()] = (list, evl(desc.split()[2].replace('str', STR)))
+                ret[name] = (list, evl(desc.split()[2].replace('str', STR)))
             elif desc.strip().startswith('str timestamp'):
-                ret[name.strip()] = datetime
+                ret[name] = datetime
             else:
-                ret[name.strip()] = evl(desc.split(None, 1)[0].replace('str', STR))
+                ret[name] = evl(desc.split(None, 1)[0].replace('str', STR))
     return ret
 

@@ -1,5 +1,4 @@
 import unittest
-import os
 from seaborn_meta.class_name import *
 
 
